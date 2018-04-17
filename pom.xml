@@ -8,6 +8,7 @@
     <artifactId>weixin-java-parent</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
+    <name>weixin-java-toolkit-parent</name>
     <modules>
         <module>weixin-java-common</module>
     </modules>
@@ -152,6 +153,13 @@
                 <version>1.16.18</version>
                 <scope>provided</scope>
             </dependency>
+
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.47</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
