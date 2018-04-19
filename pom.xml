@@ -11,6 +11,7 @@
     <name>weixin-java-toolkit-parent</name>
     <modules>
         <module>weixin-java-common</module>
+        <module>weixin-java-mp</module>
     </modules>
 
 
