@@ -23,7 +23,22 @@ public class WxError implements Serializable{
     @JSONField(name = "error_msg")
     private String errorMsg;
 
+    @JSONField(serialize = false)
     private String json;
+
+    public WxError(int errorCode, String errorMsg) {
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+    }
+
+    public WxError(int errorCode, String errorMsg, String json) {
+        this.errorCode = errorCode;
+        this.errorMsg = errorMsg;
+        this.json = json;
+    }
+
+    public WxError() {
+    }
 
     public static WxError fromJson(String json) {
         return JSONObject.toJavaObject(JSONObject.parseObject(json), WxError.class);
