@@ -3,6 +3,7 @@ package com.huanz.wx.mp.api;
 import com.huanz.wx.common.bean.WxJsApiSignature;
 import com.huanz.wx.common.exception.WxErrorException;
 import com.huanz.wx.common.util.http.RequestExecutor;
+import com.huanz.wx.common.util.http.RequestHttp;
 import com.huanz.wx.mp.bean.WxMpSemanticQuery;
 import com.huanz.wx.mp.bean.WxMpSemanticQueryResult;
 import com.huanz.wx.mp.bean.result.WxMpCurrentAutoReplyInfo;
@@ -68,6 +69,18 @@ public interface WxMpService {
      * 公众号调用或第三方平台帮公众号调用对公众号的所有api调用（包括第三方帮其调用）次数进行清零
      */
     String CLEAR_QUOTA_URL = "https://api.weixin.qq.com/cgi-bin/clear_quota";
+
+    /**
+     * 初始化http对象
+     */
+    void initHttp();
+
+    /**
+     * 获取RequestHttp对象
+     *
+     * @return RequestHttp
+     */
+    RequestHttp getRequestHttp();
 
     /**
      * 验证信息是否来自微信服务器
@@ -267,7 +280,7 @@ public interface WxMpService {
      * @param retrySleepMillions 超时时间（单位毫秒），默认1000ms
      * @throws WxErrorException exception
      */
-    void setRetrySleepMillion(int retrySleepMillions) throws WxErrorException;
+    void setRetrySleepMillion(int retrySleepMillions);
 
     /**
      * 设置微信服务端请求超时最大重试次数
@@ -275,4 +288,242 @@ public interface WxMpService {
      * @param maxRetryTimes 最大重试次数（单位次），默认5次
      */
     void setMaxRetryTimes(int maxRetryTimes);
+
+    /**
+     * 获取公众号全局配置信息
+     *
+     * @return 配置信息
+     */
+    WxMpConfigStorage getWxMpConfigStorage();
+
+    /**
+     * 设置公众号全局配置信息
+     *
+     * @param wxMpConfigStorage 配置信息
+     */
+    void setWxMpConfigStorage(WxMpConfigStorage wxMpConfigStorage);
+
+    /**
+     * 获取客服接口方法
+     *
+     * @return 客服接口
+     */
+    WxMpKefuService getKefuService();
+
+    /**
+     * 设置客服接口实现类
+     *
+     * @param wxMpKefuService 客服接口实现类
+     */
+    void setWxMpKefuService(WxMpKefuService wxMpKefuService);
+
+    /**
+     * 获取素材管理，媒体管理接口
+     *
+     * @return 素材管理，媒体管理接口
+     */
+    WxMpMaterialService getWxMpMaterialService();
+
+    /**
+     * 设置素材管理，媒体管理接口
+     *
+     * @param wxMpMaterialService 素材管理，媒体管理接口实现类
+     */
+    void setWxMpMaterialService(WxMpMaterialService wxMpMaterialService);
+
+    /**
+     * 获取公众号菜单操作接口
+     *
+     * @return 菜单操作接口
+     */
+    WxMpMenuService getWxMpMenuService();
+
+    /**
+     * 设置公众号菜单操作接口
+     *
+     * @param wxMpMenuService 公众号菜单操作接口实现类
+     */
+    void setWxMpMenuService(WxMpMenuService wxMpMenuService);
+
+    /**
+     * 获取用户操作接口
+     *
+     * @return 用户操作接口
+     */
+    WxMpUserService getWxMpUserService();
+
+    /**
+     * 设置用户操作接口
+     *
+     * @param wxMpUserService 用户操作接口实现类
+     */
+    void setWxMpUserService(WxMpUserService wxMpUserService);
+
+    /**
+     * 获取用户标签操作接口
+     *
+     * @return 用户标签接口
+     */
+    WxMpUserTagService getWxMpUserTagService();
+
+    /**
+     * 设置用户标签操作接口
+     *
+     * @param wxMpUserTagService 用户标签操作接口实现类
+     */
+    void setWxMpUserTagService(WxMpUserTagService wxMpUserTagService);
+
+    /**
+     * 获取二维码操作接口
+     *
+     * @return 二维码接口
+     */
+    WxMpQrcodeService getWxMpQrcodeService();
+
+    /**
+     * 设置二维码操作接口
+     *
+     * @param wxMpQrcodeService 二维码操作接口接口
+     */
+    void setWxMpQrcodeService(WxMpQrcodeService wxMpQrcodeService);
+
+    /**
+     * 获取卡券接口
+     *
+     * @return 卡券接口
+     */
+    WxMpCardService getWxMpCardService();
+
+    /**
+     * 设置卡券接口
+     *
+     * @param wxMpCardService 卡券接口实现类
+     */
+    void setWxMpCardService(WxMpCardService wxMpCardService);
+
+    /**
+     * 获取数据统计接口
+     *
+     * @return 数据统计接口
+     */
+    WxMpDataCubeService getWxMpDataCubeService();
+
+    /**
+     * 设置数据统计接口
+     *
+     * @param wxMpDataCubeService 数据统计接口实现类
+     */
+    void setWxMpDataCubeService(WxMpDataCubeService wxMpDataCubeService);
+
+    /**
+     * 获取用户黑名单接口
+     *
+     * @return 用户黑名单接口
+     */
+    WxMpUserBlacklistService getWxMpUserBlacklistService();
+
+    /**
+     * 设置用户黑名单接口
+     *
+     * @param wxMpUserBlacklistService 用户黑名单接口实现类
+     */
+    void setWxMpUserBlacklistService(WxMpUserBlacklistService wxMpUserBlacklistService);
+
+    /**
+     * 获取门店管理接口
+     *
+     * @return 门店管理接口
+     */
+    WxMpStoreService getWxMpStoreService();
+
+    /**
+     * 设置门店管理接口
+     *
+     * @param wxMpStoreService 门店管理接口实现类
+     */
+    void setWxMpStoreService(WxMpStoreService wxMpStoreService);
+
+    /**
+     * 获取模板消息接口
+     *
+     * @return 模板消息接口
+     */
+    WxMpTemplateMsgService getWxMpTemplateMsgService();
+
+    /**
+     * 设置模板消息接口
+     *
+     * @param wxMpTemplateMsgService 模板消息接口实现类
+     */
+    void setWxMpTemplateMsgService(WxMpTemplateMsgService wxMpTemplateMsgService);
+
+    /**
+     * 获取一次性订阅消息接口
+     *
+     * @return 一次性订阅消息接口
+     */
+    WxMpSubscribeMsgService getWxMpSubscribeMsgService();
+
+    /**
+     * 设置一次性订阅消息接口
+     *
+     * @param wxMpSubscribeMsgService 一次性订阅消息接口实现类
+     */
+    void setWxMpSubscribeMsgService(WxMpSubscribeMsgService wxMpSubscribeMsgService);
+
+    /**
+     * 获取硬件平台接口
+     *
+     * @return 硬件平台接口
+     */
+    WxMpDeviceService getWxMpDeviceService();
+
+    /**
+     * 设置硬件平台接口
+     *
+     * @param wxMpDeviceService 硬件平台接口实现类
+     */
+    void setWxMpDeviceService(WxMpDeviceService wxMpDeviceService);
+
+    /**
+     * 获取摇一摇周边接口
+     *
+     * @return 摇一摇周边接口
+     */
+    WxMpShakeService getWxMpShakeService();
+
+    /**
+     * 设置摇一摇周边接口
+     *
+     * @param wxMpShakeService 摇一摇周边接口实现类
+     */
+    void setWxMpShakeService(WxMpShakeService wxMpShakeService);
+
+    /**
+     * 获取会员卡接口
+     *
+     * @return 会员卡接口
+     */
+    WxMpMemberCardService getWxMpMemberCardService();
+
+    /**
+     * 设置会员卡接口
+     *
+     * @param wxMpMemberCardService 会员卡接口实现类
+     */
+    void setWxMpMemberCardService(WxMpMemberCardService wxMpMemberCardService);
+
+    /**
+     * 获取微信群发消息接口
+     *
+     * @return 微信群发消息接口
+     */
+    WxMpMassMessageService getWxMpMassMessageService();
+
+    /**
+     * 设置微信群发消息接口
+     *
+     * @param wxMpMassMessageService 微信群发消息接口实现类
+     */
+    void setWxMpMassMessageService(WxMpMassMessageService wxMpMassMessageService);
 }
